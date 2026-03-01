@@ -1,0 +1,78 @@
+ShowTracker Query Outputs
+=========================
+
+-- Query 1: Join of 3+ tables
+-- Shows each attendance record with the user's username, show date, venue name, rating, and review
+
+username        | date       | venue                  | rating | review
+----------------|------------|------------------------|--------|-------------------------------------------------------
+concertking     | 2024-03-15 | The Fillmore           | 5      | Phoebe was absolutely stunning. One of the best shows I have ever seen.
+concertking     | 2024-09-22 | The Ryman Auditorium   | 5      | boygenius at the Ryman was a religious experience.
+melodyhunter    | 2024-07-04 | Red Rocks Amphitheatre | 4      | Hozier at Red Rocks was breathtaking. The venue makes everything better.
+melodyhunter    | 2024-08-18 | 9:30 Club              | 5      | Japanese Breakfast put on an incredible show, Michelle is a force.
+setlistnerd     | 2024-04-20 | Red Rocks Amphitheatre | 5      | Khruangbin at Red Rocks was hypnotic. Perfect setlist.
+setlistnerd     | 2024-10-31 | Brooklyn Steel         | 4      | Steve Lacy was great but the sound mix was a little off.
+venuehopper     | 2024-06-01 | Brooklyn Steel         | 3      | Tyler put on a good show but it felt a bit short.
+venuehopper     | 2024-10-31 | Brooklyn Steel         | 5      | Steve Lacy absolutely killed it at Brooklyn Steel.
+indievibes      | 2024-03-15 | The Fillmore           | 5      | Seeing Phoebe and boygenius on the same bill was surreal.
+indievibes      | 2025-01-14 | The Fillmore           | 4      | Mitski at the Fillmore was emotional and powerful.
+folkfanatic     | 2024-09-22 | The Ryman Auditorium   | 5      | boygenius at the Ryman was everything I hoped for.
+folkfanatic     | 2024-07-04 | Red Rocks Amphitheatre | 4      | Hozier never disappoints. Red Rocks is the perfect venue for him.
+basslineking    | 2024-04-20 | Red Rocks Amphitheatre | 5      | Khruangbin is even better live than on record.
+basslineking    | 2024-06-01 | Brooklyn Steel         | 4      | Tyler delivered a high energy set, crowd was insane.
+showlogger      | 2024-05-10 | 9:30 Club              | 5      | Mitski at the 9:30 Club was intimate and unforgettable.
+
+-- Query 2: Subquery
+-- Find all users who have attended at least one show
+
+username
+------------
+concertking
+melodyhunter
+setlistnerd
+venuehopper
+indievibes
+folkfanatic
+basslineking
+showlogger
+
+-- Query 3: GROUP BY with HAVING
+-- Find artists with an average attendance rating above 4
+
+name                | avg_rating
+--------------------|------------
+Japanese Breakfast  | 5.0
+Khruangbin          | 5.0
+Mitski              | 4.5
+Phoebe Bridgers     | 5.0
+Steve Lacy          | 4.5
+boygenius           | 5.0
+
+-- Query 4: Complex search criterion
+-- Find shows that are either Indie Folk or Folk Rock, cost less than $70, and have at least one attendance record
+
+show_id | date       | genre      | ticketPrice | venue
+--------|------------|------------|-------------|----------------------
+1       | 2024-03-15 | Indie Folk | 35          | The Fillmore
+7       | 2024-09-22 | Indie Folk | 65          | The Ryman Auditorium
+
+-- Query 5: Advanced - RANK() OVER with PARTITION BY and CASE/WHEN
+-- Rank each user's attended shows by rating and label the rating
+
+username        | rating | rating_label | user_rank
+----------------|--------|--------------|----------
+concertking     | 5      | Excellent    | 1
+concertking     | 5      | Excellent    | 1
+melodyhunter    | 5      | Excellent    | 1
+melodyhunter    | 4      | Good         | 2
+setlistnerd     | 5      | Excellent    | 1
+setlistnerd     | 4      | Good         | 2
+venuehopper     | 5      | Excellent    | 1
+venuehopper     | 3      | Average      | 2
+indievibes      | 5      | Excellent    | 1
+indievibes      | 4      | Good         | 2
+folkfanatic     | 5      | Excellent    | 1
+folkfanatic     | 4      | Good         | 2
+basslineking    | 5      | Excellent    | 1
+basslineking    | 4      | Good         | 2
+showlogger      | 5      | Excellent    | 1
