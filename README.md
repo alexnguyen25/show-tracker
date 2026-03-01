@@ -26,11 +26,12 @@ show-tracker/
 │
 ├── documents/
 │   ├── requirements.pdf          ← [Point 1] Requirements document
+│   ├── cs3200 project 1.pdf      ← [Point 4] Relational schema with BCNF proof
 │   └── query_outputs.txt         ← [Point 7] Example outputs of all queries
 │
 ├── diagrams/
-│   ├── ERD and Relational Schema.pdf  ← [Points 3 & 4] ERD + Relational schema with BCNF proof
-│   └── uml_conceptual_model.png       ← [Point 2] UML Conceptual Model
+│   ├── uml_conceptual_model.png  ← [Point 2] UML Conceptual Model
+│   └── erd_logical_model.png     ← [Point 3] ERD Logical Model
 │
 └── sql/
     ├── create_tables.sql         ← [Point 5] DDL statements
@@ -70,7 +71,9 @@ Five entity classes with full multiplicity constraints and typed attributes:
 
 ### Point 3 — Logical Data Model / ERD (10 pts)
 
-**File:** [`diagrams/ERD and Relational Schema.pdf`](diagrams/ERD%20and%20Relational%20Schema.pdf)
+**File:** [`diagrams/erd_logical_model.png`](diagrams/erd_logical_model.jpeg)
+
+![ERD Logical Model](diagrams/erd_logical_model.jpeg)
 
 All M:N relationships resolved into association entities:
 
@@ -79,9 +82,19 @@ All M:N relationships resolved into association entities:
 - **Attendance** resolves User ↔ Show (carries `rating` and `review` attributes)
 - **Setlist** resolves Show ↔ Song (carries `order_num`)
 
+Relationship labels include:
+
+- Venue **hosts** Show
+- Show **has** Setlist
+- Song **appears in** Setlist
+- Artist **performs** at Show (via ShowArtist)
+- User **logs** Attendance
+- Attendance is **for** a Show
+- User **follows** Artist (via UserFollows)
+
 ### Point 4 — Relational Schema in BCNF (15 pts)
 
-**File:** [`diagrams/ERD and Relational Schema.pdf`](diagrams/ERD%20and%20Relational%20Schema.pdf)
+**File:** [`documents/cs3200 project 1.pdf`](documents/cs3200%20project%201.pdf)
 
 Nine relations, each proven to be in BCNF by listing functional dependencies and verifying every determinant is a superkey:
 
@@ -137,6 +150,9 @@ All queries and their outputs are documented in [`documents/query_outputs.txt`](
 | 4 | Complex search criterion | [`query4.sql`](sql/queries/query4.sql) | Shows that are Indie Folk or Folk Rock, cost less than $70, and have at least one attendance record (OR + AND + IN with subquery) |
 | 5 | Advanced mechanisms | [`query5.sql`](sql/queries/query5.sql) | RANK() OVER with PARTITION BY user and CASE/WHEN to label ratings as Excellent/Good/Average/Poor |
 
+---
+
+
 ## How to Run Queries Individually
 
 ```bash
@@ -151,6 +167,8 @@ sqlite3 -header -column showtracker.db < sql/queries/query3.sql
 sqlite3 -header -column showtracker.db < sql/queries/query4.sql
 sqlite3 -header -column showtracker.db < sql/queries/query5.sql
 ```
+
+---
 
 ## AI Usage
 
