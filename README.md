@@ -190,6 +190,6 @@ AI (Claude by Anthropic) was used throughout this project for the following:
 - **UML Class Diagram** — generating class attributes, types, relationships, and multiplicities as a reference for building the diagram in LucidChart
 - **Test Data** — generating realistic INSERT statements for all 9 tables
 - **Query Outputs** — formatting query results into a readable output file
-- **web application** — used to help generate the Node + Express application code, including the Most of the .json files, Connecting the HTML to the Backend, and helped with lots of the debugging.
+- **web application** — used to help generate the Node + Express application code, including Most of the .json files, Connecting the HTML to the Backend, and helped with lots of the debugging.
 
 All AI-generated content was reviewed, tested, and verified by the team before inclusion in the project.
