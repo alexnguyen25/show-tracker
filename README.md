@@ -169,7 +169,7 @@ sqlite3 -header -column showtracker.db < sql/queries/query5.sql
 ```
 
 ---
-### Point 8 — Queries (20 pts)
+### Point 8 — Web Application (20 pts)
 A basic CRUD web application built with Node.js, Express, SQLite (via sql.js), and EJS templates.
 
 ## How to Run
