@@ -11,7 +11,6 @@ async function getDb() {
 
   const SQL = await initSqlJs();
 
-  // Load existing db file or create new one
   if (fs.existsSync(DB_PATH)) {
     const buffer = fs.readFileSync(DB_PATH);
     db = new SQL.Database(buffer);
@@ -19,10 +18,8 @@ async function getDb() {
     db = new SQL.Database();
   }
 
-  // Enable foreign keys
   db.run("PRAGMA foreign_keys = ON");
 
-  // Create tables
   db.run(`
     CREATE TABLE IF NOT EXISTS Venue (
       venue_id INTEGER PRIMARY KEY AUTOINCREMENT,

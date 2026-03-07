@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const { getDb, save } = require("../db/mydb");
 
-// Helper to get venues list
 async function getVenues() {
   const db = await getDb();
   const results = db.exec("SELECT * FROM Venue ORDER BY name");
@@ -11,7 +10,6 @@ async function getVenues() {
   })) : [];
 }
 
-// READ - List all shows (joined with venue name)
 router.get("/", async (req, res) => {
   const db = await getDb();
   const results = db.exec(`
@@ -26,13 +24,11 @@ router.get("/", async (req, res) => {
   res.render("shows", { shows });
 });
 
-// CREATE - Show form (need venues for dropdown)
 router.get("/new", async (req, res) => {
   const venues = await getVenues();
   res.render("showForm", { venues });
 });
 
-// CREATE - Handle form submission
 router.post("/", async (req, res) => {
   const { date, ticketPrice, genre, venue_id } = req.body;
   const db = await getDb();
@@ -44,7 +40,6 @@ router.post("/", async (req, res) => {
   res.redirect("/shows");
 });
 
-// UPDATE - Show edit form
 router.get("/:id/edit", async (req, res) => {
   const db = await getDb();
   const results = db.exec("SELECT * FROM Show WHERE show_id = ?", [req.params.id]);
@@ -55,7 +50,6 @@ router.get("/:id/edit", async (req, res) => {
   res.render("showEdit", { show, venues });
 });
 
-// UPDATE - Handle edit submission
 router.post("/:id/edit", async (req, res) => {
   const { date, ticketPrice, genre, venue_id } = req.body;
   const db = await getDb();
@@ -67,7 +61,6 @@ router.post("/:id/edit", async (req, res) => {
   res.redirect("/shows");
 });
 
-// DELETE - Handle deletion
 router.post("/:id/delete", async (req, res) => {
   const db = await getDb();
   db.run("DELETE FROM Show WHERE show_id = ?", [req.params.id]);
